@@ -1,6 +1,7 @@
 const { Options } = model("");
 const { Questions } = model("");
 const { optionSchema } = validate("OptionValidator");
+const { checkTeacher } = helper("CourseHelpers");
 
 
 
