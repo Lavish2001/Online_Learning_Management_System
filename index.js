@@ -15,11 +15,126 @@ let questionRoutes = require("./routes/QuestionApi");
 let marksRoutes = require("./routes/MarksApi");
 let gradeRoutes = require("./routes/GradesApi");
 let optionsRoutes = require('./routes/OptionsApi');
+const { Courses } = model("");
+const { Users } = model("");
+const { Enrollments } = model("");
+const { Grades } = model("");
+
+
+
 // let paymentRoutes = require('./routes/PaymentApi');
 // Import the library:
 let cors = require("cors");
 let app = express();
 const dir = (__dirname + '/Public/Courses/Lessons');
+const { GraphQLObjectType, GraphQLSchema, GraphQLString, GraphQLInt, GraphQLList, GraphQLNonNull } = require('graphql');
+const { graphqlHTTP } = require('express-graphql');
+
+
+const UserType = new GraphQLObjectType({
+  name: 'Users',
+  description: 'all Courses',
+  fields: () => ({
+    id: { type: new GraphQLNonNull(GraphQLInt) },
+    username: { type: new GraphQLNonNull(GraphQLString) },
+    email: { type: new GraphQLNonNull(GraphQLString) }
+    // add other fields as needed
+  }),
+});
+
+const GradeType = new GraphQLObjectType({
+  name: 'Grades',
+  description: 'Student Grades',
+  fields: () => ({
+    id: { type: new GraphQLNonNull(GraphQLInt) },
+    grade: { type: GraphQLString },
+    // add other fields as needed
+  }),
+});
+
+const EnrollmentType = new GraphQLObjectType({
+  name: 'Enrollments',
+  description: 'Students Enrollments',
+  fields: () => ({
+    id: { type: new GraphQLNonNull(GraphQLInt) },
+    student_id: { type: new GraphQLNonNull(GraphQLInt) },
+    course_id: { type: new GraphQLNonNull(GraphQLInt) },
+    enrolled_at: { type: new GraphQLNonNull(GraphQLString) },
+    completed_at: { type: GraphQLString },
+    student_details: {
+      type: UserType,
+      resolve: async (parent, args) => {
+        return Users.findOne({ where: { id: parent.student_id } })
+      }
+    },
+    student_grade: {
+      type: GradeType,
+      resolve: async (parent, args) => {
+        return Grades.findOne({ where: { student_id: parent.student_id, course_id: parent.course_id } })
+      }
+    },
+    // add other fields as needed
+  }),
+});
+
+const CourseType = new GraphQLObjectType({
+  name: 'Courses',
+  description: 'all Courses',
+  fields: () => ({
+    id: { type: new GraphQLNonNull(GraphQLInt) },
+    course_name: { type: new GraphQLNonNull(GraphQLString) },
+    description: { type: new GraphQLNonNull(GraphQLString) },
+    course_price: { type: new GraphQLNonNull(GraphQLInt) },
+    teacher: {
+      type: UserType,
+      resolve: async (parent, args) => {
+        return Users.findOne({ where: { id: parent.teacher_id } })
+      }
+    },
+    enrollments: {
+      type: new GraphQLList(EnrollmentType),
+      resolve: async (parent, args) => {
+        return Enrollments.findAll({ where: { course_id: parent.id } })
+      }
+    }
+    // add other fields as needed
+  }),
+});
+
+
+const RootQueryType = new GraphQLObjectType({
+  name: 'Query',
+  description: 'Root Query',
+  fields: () => ({
+    courses: {
+      type: new GraphQLList(CourseType),
+      description: 'All Available Courses',
+      args: {
+        id: { type: GraphQLInt }
+      },
+      resolve: async (parent, args) => {
+        if (args.id) {
+          const courses = await Courses.findAll({ where: { id: args.id } });
+          return courses
+        } else {
+          const courses = await Courses.findAll();
+          return courses;
+        }
+      }
+    }
+  })
+});
+
+const schema = new GraphQLSchema({
+  query: RootQueryType
+})
+
+
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  graphiql: true,
+}))
+
 
 // sequelize.sync();
 
