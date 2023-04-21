@@ -15,10 +15,9 @@ let questionRoutes = require("./routes/QuestionApi");
 let marksRoutes = require("./routes/MarksApi");
 let gradeRoutes = require("./routes/GradesApi");
 let optionsRoutes = require('./routes/OptionsApi');
-const { Courses } = model("");
-const { Users } = model("");
-const { Enrollments } = model("");
-const { Grades } = model("");
+const { Courses, Users, Enrollments, Grades } = model("");
+const { HashPassword, compare } = helper("UserHelpers")
+
 
 
 
@@ -27,7 +26,7 @@ const { Grades } = model("");
 let cors = require("cors");
 let app = express();
 const dir = (__dirname + '/Public/Courses/Lessons');
-const { GraphQLObjectType, GraphQLSchema, GraphQLString, GraphQLInt, GraphQLList, GraphQLNonNull } = require('graphql');
+const { GraphQLObjectType, GraphQLSchema, GraphQLString, GraphQLInt, GraphQLList, GraphQLNonNull, graphql } = require('graphql');
 const { graphqlHTTP } = require('express-graphql');
 
 
@@ -37,7 +36,11 @@ const UserType = new GraphQLObjectType({
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLInt) },
     username: { type: new GraphQLNonNull(GraphQLString) },
-    email: { type: new GraphQLNonNull(GraphQLString) }
+    email: { type: new GraphQLNonNull(GraphQLString) },
+    password: { type: new GraphQLNonNull(GraphQLString) },
+    role: { type: new GraphQLNonNull(GraphQLString) },
+    currPassword: { type: new GraphQLNonNull(GraphQLString) },
+    newPassword: { type: new GraphQLNonNull(GraphQLString) }
     // add other fields as needed
   }),
 });
@@ -133,21 +136,128 @@ const schema = new GraphQLSchema({
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql: true,
-}))
+  rootValue: true
+}));
 
 
-// sequelize.sync();
+// FOR INSERT DATA //
 
-// view engine setup
-app.set("views", path.join(__dirname, "resources/views"));
-app.set("view engine", "twig"); // either pug,twig etc
+// const MutationType = new GraphQLObjectType({
+//   name: 'Mutation',
+//   description: 'Root Mutation',
+//   fields: () => ({
+//     createUser: {
+//       type: UserType,
+//       args: {
+//         username: { type: new GraphQLNonNull(GraphQLString) },
+//         email: { type: new GraphQLNonNull(GraphQLString) },
+//         password: { type: new GraphQLNonNull(GraphQLString) },
+//         role: { type: new GraphQLNonNull(GraphQLString) }
+//       },
+//       resolve: async (parent, args) => {
+//         const hash = await HashPassword(args.password);
+//         const user = await Users.create({
+//           username: args.username,
+//           email: args.email,
+//           password: hash,
+//           role: args.role
+//         });
+//         return user;
+//       }
+//     }
+//   })
+// });
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-// Then use it before your routes are set up:
+
+// const userSchema = new GraphQLSchema({
+//   query: RootQueryType,
+//   mutation: MutationType
+// });
+
+// app.use('/user', graphqlHTTP({
+//   schema: userSchema,
+//   graphiql: true,
+//   rootValue: true
+// }));
+
+
+
+// FOR DELETE DATA //
+
+
+// const MutationType = new GraphQLObjectType({
+//   name: 'Mutation',
+//   description: 'Root Mutation',
+//   fields: () => ({
+//     deleteUser: {
+//       type: UserType,
+//       args: {
+//         id: { type: new GraphQLNonNull(GraphQLInt) }
+//       },
+//       resolve: async (parent, args) => {
+//         const user = await Users.findOne({ where: { id: args.id } })
+//         await user.destroy();
+//         return user;
+//       }
+//     }
+//   })
+// });
+
+
+// const userSchema = new GraphQLSchema({
+//   query: RootQueryType,
+//   mutation: MutationType
+// });
+
+// app.use('/user', graphqlHTTP({
+//   schema: userSchema,
+//   graphiql: true,
+//   rootValue: true
+// }));
+
+
+
+// FOR UPDATE DATA //
+
+// const MutationType = new GraphQLObjectType({
+//   name: 'Mutation',
+//   description: 'Root Mutation',
+//   fields: () => ({
+//     updateUser: {
+//       type: UserType,
+//       args: {
+//         id: { type: new GraphQLNonNull(GraphQLInt) },
+//         currPassword: { type: new GraphQLNonNull(GraphQLString) },
+//         newPassword: { type: new GraphQLNonNull(GraphQLString) }
+//       },
+//       resolve: async (parent, args) => {
+//         const user = await Users.findOne({ where: { id: args.id } });
+//         const match = await compare(args.currPassword, user.password);
+//         const hash = await HashPassword(args.newPassword);
+//         const newUser = await user.update({
+//           password: hash
+//         });
+//         return newUser;
+//       }
+//     }
+//   })
+// });
+
+
+// const userSchema = new GraphQLSchema({
+//   query: RootQueryType,
+//   mutation: MutationType
+// });
+
+// app.use('/user', graphqlHTTP({
+//   schema: userSchema,
+//   graphiql: true,
+//   rootValue: true
+// }));
+
+
+
+
 
 // FILES ROUTES //
 

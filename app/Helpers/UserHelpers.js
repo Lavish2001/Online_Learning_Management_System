@@ -45,7 +45,7 @@ const assignToken = async (id) => {
 
 // COMPARE BCRYPT PASSWORD
 
-const compare = async (req, res, notHash, hash) => {
+const compare = async (notHash, hash) => {
     const checkPassword = await bcrypt.compare(notHash, hash);
     if (!checkPassword) {
         throw new Error('incorrect password');
