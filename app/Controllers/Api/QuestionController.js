@@ -1,7 +1,4 @@
-const { Options } = model("");
-const { Questions } = model("");
-const { Tests } = model("");
-const { Lessons } = model("");
+const { Options, Questions, Tests, Lessons } = model("");
 const { questionSchema } = validate("QuestionValidator");
 const { checkCourse } = helper("CourseHelpers");
 const { Op } = require('sequelize');

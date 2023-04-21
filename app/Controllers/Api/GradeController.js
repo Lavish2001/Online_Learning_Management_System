@@ -1,6 +1,4 @@
-const { Courses } = model("");
-const { Grades } = model("");
-const { Users } = model("");
+const { Courses, Grades, Users } = model("");
 const { checkStudent, checkTeacher } = helper("CourseHelpers");
 const remove = ['updatedAt', 'createdAt'];
 const { Op } = require('sequelize');

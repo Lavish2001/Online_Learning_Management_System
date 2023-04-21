@@ -1,5 +1,4 @@
-const { Users } = model("");
-const { UserSession } = model("");
+const { Users, UserSession } = model("");
 const { Op } = require('sequelize');
 const { signupSchema, loginSchema, changePasswordSchema } = validate("UserValidator");
 const { HashPassword, passwordCheck, assignToken, compare, options } = helper("UserHelpers");

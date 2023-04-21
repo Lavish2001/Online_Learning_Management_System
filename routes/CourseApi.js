@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const ccontroller = controller("Api/CourseController");
 const loginAuth = middleware("loginAuth");
-const app = express();
-const { sequelize } = require('../app/Models/index');
 
 
 

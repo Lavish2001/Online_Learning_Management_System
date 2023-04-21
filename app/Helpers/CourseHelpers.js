@@ -1,5 +1,4 @@
-const { Courses } = model("");
-const { Enrollments } = model("");
+const { Courses, Enrollments } = model("");
 const { Op } = require('sequelize');
 
 

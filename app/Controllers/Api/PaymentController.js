@@ -1,5 +1,4 @@
-// const { Tests } = model("");
-// const { Lessons } = model("");
+// const { Tests, Lessons } = model("");
 // const { testSchema } = validate("TestValidator");
 // const { checkCourse } = helper("CourseHelpers");
 // const Razorpay = require('razorpay');

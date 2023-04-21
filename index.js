@@ -16,7 +16,7 @@ let marksRoutes = require("./routes/MarksApi");
 let gradeRoutes = require("./routes/GradesApi");
 let optionsRoutes = require('./routes/OptionsApi');
 const { Courses, Users, Enrollments, Grades } = model("");
-const { HashPassword, compare } = helper("UserHelpers")
+const { HashPassword, compare } = helper("UserHelpers");
 
 
 

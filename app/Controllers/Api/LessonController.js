@@ -1,9 +1,4 @@
-const { Enrollments } = model("");
-const { Lessons } = model("");
-const { Questions } = model("");
-const { Courses } = model("");
-const { Tests } = model("");
-const { Options } = model("");
+const { Enrollments, Lessons, Questions, Courses, Tests, Options } = model("");
 const { checkCourse, checkEnrollment } = helper("CourseHelpers");
 const { upload } = helper("LessonHelpers");
 const { Op } = require('sequelize');

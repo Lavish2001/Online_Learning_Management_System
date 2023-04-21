@@ -1,15 +1,7 @@
-const { Courses } = model("");
-const express = require('express');
-const app = express();
 const { courseSchema, courseUpdateSchema } = validate("CourseValidator");
 const { checkTeacher, checkCourse } = helper("CourseHelpers");
 const { Op } = require('sequelize');
-const { Questions } = model("");
-const { Lessons } = model("");
-const { Users } = model("");
-const { Tests } = model("");
-const { Options } = model("");
-const { sequelize } = require('../../Models/index');
+const { Questions, Lessons, Users, Tests, Options, Courses } = model("");
 
 
 module.exports = class CourseController {
