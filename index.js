@@ -118,7 +118,7 @@ const RootQueryType = new GraphQLObjectType({
       resolve: async (parent, args) => {
         if (args.id) {
           const courses = await Courses.findAll({ where: { id: args.id } });
-          return courses
+          return courses;
         } else {
           const courses = await Courses.findAll();
           return courses;
@@ -138,6 +138,9 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
   rootValue: true
 }));
+
+
+// GRAPHQL API FOR DELETE, POST, UPDATE //
 
 
 // FOR INSERT DATA //
@@ -232,7 +235,7 @@ app.use('/graphql', graphqlHTTP({
 //       },
 //       resolve: async (parent, args) => {
 //         const user = await Users.findOne({ where: { id: args.id } });
-//         const match = await compare(args.currPassword, user.password);
+//         await compare(args.currPassword, user.password);
 //         const hash = await HashPassword(args.newPassword);
 //         const newUser = await user.update({
 //           password: hash
@@ -260,6 +263,8 @@ app.use('/graphql', graphqlHTTP({
 
 
 // FILES ROUTES //
+
+
 
 app.use('/Images', express.static(path.join(dir)));
 
