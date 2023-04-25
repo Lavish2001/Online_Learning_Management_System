@@ -22,7 +22,7 @@ The OLMS can be customized and extended as needed to fit your specific requireme
 
 Overall, the Node.js Online Learning Management System provides a powerful and flexible platform for delivering and managing online courses and training programs.
 
-- Clone Nodejs-serverless-boilerplate Repository
+- Clone Nodejs-Online-Learning-Management-System Repository
 ```bash
     git clone https://github.com/Lavish2001/Online_Learning_Management_System.git
 ```
