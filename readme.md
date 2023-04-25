@@ -8,7 +8,7 @@ An OLMS typically includes features such as course creation and management, stud
 
 The Node.js Online Learning Management System is a web-based application built using Node.js technology. It is designed to provide a comprehensive platform for delivering and managing online courses and training programs.
 
-This OLMS is built on top of GraphQL, a query language for APIs, which provides a flexible and efficient way to fetch and manage data. It also uses various Node.js packages and libraries to handle authentication, data storage, and other common web application tasks.
+This OLMS is built on Node.js which provides a flexible and efficient way to fetch and manage data. It also uses various Node.js packages and libraries to handle authentication, data storage, and other common web application tasks.
 
 The features of this OLMS include course creation and management, student enrollment and tracking, grading and assessments, and reporting and analytics. It also includes various user roles and permissions to manage access to courses and content.
 
