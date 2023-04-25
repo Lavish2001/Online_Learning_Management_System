@@ -1,20 +1,30 @@
-# Nodejs-serverless-boilerplate😎
-A Powerful,Flexible and Scalable boilerplate for your Serverless backend.It will help you to keep Calm,you don't need to worry about building backend architecure.Just spend your time on writting your bussiness logic.
+# Nodejs-online-learning-management-system😎
+This is a Online Learning Management System (OLMS).An Online Learning Management System (OLMS) is a site used to deliver educational courses, training programs, or learning and development programs online. It is designed to help organizations manage the entire learning process, including the creation, delivery, and tracking of course materials and student progress.
+
+An OLMS typically includes features such as course creation and management, student enrollment and tracking, grading and assessments, and reporting and analytics
 
 
-It's an Open Source Boilerplate carfted by **Community Developers** for architecture Simplicity,Flexiblity and Scalablity.
+## Nodejs-Online-Learning-Management-System -
 
-## Why Nodejs-serverless-boilerplate 🤔
+The Node.js Online Learning Management System is a web-based application built using Node.js technology. It is designed to provide a comprehensive platform for delivering and managing online courses and training programs.
 
-- This is simple in terms of architecture.
-- This is flexible and also architecture is open to modify according to your comfort.
-- This is well organised,well optimised and well tested for scalable projects.
+This OLMS is built on top of GraphQL, a query language for APIs, which provides a flexible and efficient way to fetch and manage data. It also uses various Node.js packages and libraries to handle authentication, data storage, and other common web application tasks.
+
+The features of this OLMS include course creation and management, student enrollment and tracking, grading and assessments, and reporting and analytics. It also includes various user roles and permissions to manage access to courses and content.
+
 - Git clone -> npm install -> project is ready to use. 
 
-## How to use Nodejs-serverless-boilerplate??🧐
+## How to use Nodejs-Online-Learning-management-System??🧐
+
+To use the Node.js Online Learning Management System, you can clone the repository from GitHub and install the necessary dependencies using npm. Then, you can run the server and start using the application in your browser.
+
+The OLMS can be customized and extended as needed to fit your specific requirements. You can also add additional features and integrations using the various Node.js packages and libraries available.
+
+Overall, the Node.js Online Learning Management System provides a powerful and flexible platform for delivering and managing online courses and training programs.
+
 - Clone Nodejs-serverless-boilerplate Repository
 ```bash
-    git clone https://github.com/Rohitjoshi9023/Nodejs-serverless-boilerplate.git
+    git clone https://github.com/Lavish2001/Online_Learning_Management_System.git
 ```
 - Install NPM packages 
 ```bash
